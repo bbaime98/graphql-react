@@ -27,6 +27,6 @@ mongoose
     {useNewUrlParser: true}
   )
   .then(() => {
-    app.listen(3000, () => console.log("Server started"))
+    app.listen(process.env.PORT, () => console.log("Server started"))
   })
   .catch((error) => console.log("database Error", error))
