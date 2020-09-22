@@ -23,7 +23,6 @@ app.use((req, res, next) => {
 })
 app.use(isAuth)
 
-app.use("/", (req, res) => res.send("Welcome to the bookshop Api"))
 app.use(
   "/graphql",
   graphqlHttp({
@@ -32,6 +31,7 @@ app.use(
     graphiql: true,
   })
 )
+app.use("/", (req, res) => res.send("Welcome to the bookshop Api"))
 
 mongoose
   .connect(
