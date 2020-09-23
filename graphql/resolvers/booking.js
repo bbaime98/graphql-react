@@ -3,7 +3,10 @@ const Event = require("../../models/event")
 const {transformBooking, transformEvent} = require("./shared")
 
 module.exports = {
-  bookings: async () => {
+  bookings: async (args, req) => {
+    if (!req.isAuth) {
+      throw new Error("unauthenticated")
+    }
     try {
       const bookings = await Booking.find()
       return bookings.map((booking) => {
