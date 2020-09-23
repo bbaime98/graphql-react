@@ -26,9 +26,10 @@ const user = async (userId) => {
   try {
     const user = await User.findById(userId)
     return {
-      ...user._doc,
+      // ...user._doc,
       _id: user.id,
-      createdEvents: events.bind(this, user._doc.createdEvents),
+      email: user.email,
+      // createdEvents: events.bind(this, user._doc.createdEvents),
     }
   } catch (error) {
     throw error
@@ -37,7 +38,10 @@ const user = async (userId) => {
 
 const transformEvent = (event) => {
   return {
-    ...event._doc,
+    title: event.title,
+    description: event.description,
+    price: event.price,
+    date: event.date,
     _id: event.id,
     creator: user.bind(this, event.creator),
     date: dateToString(event._doc.date),
@@ -46,7 +50,7 @@ const transformEvent = (event) => {
 
 const transformBooking = (booking) => {
   return {
-    ...booking._doc,
+    // ...booking._doc,
     _id: booking.id,
     user: user.bind(this, booking._doc.user),
     event: singleEvent.bind(this, booking._doc.event),
